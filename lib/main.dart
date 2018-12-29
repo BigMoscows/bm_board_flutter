@@ -193,8 +193,8 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  Widget _buildBMItems(Orientation deviceOrientation) {
-    if (deviceOrientation == Orientation.portrait) {
+  Widget _buildBMItems(double smallestDimension) {
+    if (smallestDimension < 600) {
       return ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return BMTile(bmItem: _items[index], player: player);
@@ -204,6 +204,13 @@ class _HomepageState extends State<Homepage> {
     } else {
       // Build grid view
       // TODO: improve with a grid layout
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 3.0,
+        children: _items.map((BM bm) {
+          return BMTile(bmItem: bm, player: player);
+        }).toList(),
+      );
     }
   }
 
@@ -231,7 +238,7 @@ class _HomepageState extends State<Homepage> {
         body: Center(
           child: _loading
               ? bodyProgress
-              : _buildBMItems(MediaQuery.of(context).orientation),
+              : _buildBMItems(MediaQuery.of(context).size.shortestSide),
         ));
   }
 }

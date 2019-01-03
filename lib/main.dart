@@ -205,8 +205,8 @@ class _HomepageState extends State<Homepage> {
     } else {
       // Build grid view
       return GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: 4.0,
+        crossAxisCount: 4,
+        childAspectRatio: 3.0,
         children: _items.map((BM bm) {
           return BMTile(bmItem: bm, player: player);
         }).toList(),

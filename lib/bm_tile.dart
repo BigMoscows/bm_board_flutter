@@ -28,45 +28,48 @@ class BMTileState extends State<BMTile> {
     return Material(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
         decoration: new BoxDecoration(
           color: Colors.grey.shade300.withOpacity(0.3),
           borderRadius: new BorderRadius.circular(5.0),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(widget.bmItem.name),
-            IconButton(
-              icon:
-                  _playing ? new Icon(Icons.stop) : new Icon(Icons.play_arrow),
-              onPressed: () {
-                if (!_playing) {
-                  setState(() {
-                    _playing = true;
-                  });
-                  widget.player
-                      .play(widget.bmItem.audioLocation)
-                      .then((result) {
+        child: InkWell(
+          onTap: () {
+            if (!_playing) {
+              setState(() {
+                _playing = true;
+              });
+              widget.player.play(widget.bmItem.audioLocation).then((result) {
+                setState(() {
+                  _audioPlayer = result;
+                  result.completionHandler = () {
                     setState(() {
-                      _audioPlayer = result;
-                      result.completionHandler = () {
-                        print("Stopped");
-                        setState(() {
-                          _playing = false;
-                        });
-                      };
+                      _playing = false;
                     });
-                  });
-                } else {
-                  setState(() {
-                    _playing = false;
-                  });
-                  _audioPlayer.stop();
-                }
-              },
-            )
-          ],
+                  };
+                });
+              });
+            } else {
+              setState(() {
+                _playing = false;
+              });
+              _audioPlayer.stop();
+            }
+          },
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(widget.bmItem.name),
+                IconButton(
+                  icon: _playing
+                      ? new Icon(Icons.stop)
+                      : new Icon(Icons.play_arrow),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

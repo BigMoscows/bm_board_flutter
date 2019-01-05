@@ -43,6 +43,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
+    - assets/data.json
     - assets/audio/austra.mp3
     - assets/audio/ahah.mp3
     - assets/audio/austra.mp3

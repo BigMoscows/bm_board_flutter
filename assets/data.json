@@ -1,0 +1,317 @@
+[
+  {
+    "sound": "ahah.mp3",
+    "label": "Ah Ah",
+    "blasphemy": false
+  },
+  {
+    "sound": "austra.mp3",
+    "label": "Austra",
+    "blasphemy": false
+  },
+  {
+    "sound": "blasphemy_0.mp3",
+    "label": "Blasphemy 0",
+    "blasphemy": true
+  },
+  {
+    "sound": "blasphemy_1.mp3",
+    "label": "Blasphemy 1",
+    "blasphemy": true
+  },
+  {
+    "sound": "blasphemy_2.mp3",
+    "label": "Blasphemy 2",
+    "blasphemy": true
+  },
+  {
+    "sound": "blasphemy_3.mp3",
+    "label": "Blasphemy 3",
+    "blasphemy": true
+  },
+  {
+    "sound": "brrr.mp3",
+    "label": "Brrr",
+    "blasphemy": false
+  },
+  {
+    "sound": "calm.mp3",
+    "label": "Calm",
+    "blasphemy": false
+  },
+  {
+    "sound": "cant_understand_stuff.mp3",
+    "label": "Can't understand stuff",
+    "blasphemy": true
+  },
+  {
+    "sound": "diosss.mp3",
+    "label": "Diosss",
+    "blasphemy": false
+  },
+  {
+    "sound": "distracted.mp3",
+    "label": "Distracted",
+    "blasphemy": false
+  },
+  {
+    "sound": "do_again.mp3",
+    "label": "Do again",
+    "blasphemy": false
+  },
+  {
+    "sound": "dog_x3.mp3",
+    "label": "Dog X4",
+    "blasphemy": true
+  },
+  {
+    "sound": "dont_entry_0.mp3",
+    "label": "Don't entry 0",
+    "blasphemy": false
+  },
+  {
+    "sound": "dont_entry_1.mp3",
+    "label": "Don't entry 1",
+    "blasphemy": false
+  },
+  {
+    "sound": "dont_entry_2.mp3",
+    "label": "Don't entry 2",
+    "blasphemy": false
+  },
+  {
+    "sound": "door_0.mp3",
+    "label": "Door 0",
+    "blasphemy": true
+  },
+  {
+    "sound": "door_1.mp3",
+    "label": "Door 1",
+    "blasphemy": false
+  },
+  {
+    "sound": "door_3.mp3",
+    "label": "Door 2",
+    "blasphemy": false
+  },
+  {
+    "sound": "dots_and_capital_less.mp3",
+    "label": "Dots and capital less",
+    "blasphemy": false
+  },
+  {
+    "sound": "dunno.mp3",
+    "label": "Don't know",
+    "blasphemy": false
+  },
+  {
+    "sound": "each_start.mp3",
+    "label": "Each start",
+    "blasphemy": false
+  },
+  {
+    "sound": "ex_deputy_major.mp3",
+    "label": "Ex deputy major",
+    "blasphemy": false
+  },
+  {
+    "sound": "fantoni_score.mp3",
+    "label": "Fantoni score",
+    "blasphemy": true
+  },
+  {
+    "sound": "fuck.mp3",
+    "label": "Fuck",
+    "blasphemy": false
+  },
+  {
+    "sound": "gaetano.mp3",
+    "label": "Gaetano",
+    "blasphemy": false
+  },
+  {
+    "sound": "goodmorning.mp3",
+    "label": "Good Morning",
+    "blasphemy": false
+  },
+  {
+    "sound": "goodnight.mp3",
+    "label": "Good Night",
+    "blasphemy": false
+  },
+  {
+    "sound": "head_breaker.mp3",
+    "label": "Head Breaker",
+    "blasphemy": true
+  },
+  {
+    "sound": "hope_0.mp3",
+    "label": "Hope 0",
+    "blasphemy": false
+  },
+  {
+    "sound": "hope_1.mp3",
+    "label": "Hope 1 ",
+    "blasphemy": false
+  },
+  {
+    "sound": "if_i_dont_blaspheme_look.mp3",
+    "label": "If I don't blaspheme look",
+    "blasphemy": false
+  },
+  {
+    "sound": "iron_toucher.mp3",
+    "label": "Iron toucher",
+    "blasphemy": false
+  },
+  {
+    "sound": "it_was_beauty.mp3",
+    "label": "It was beauty",
+    "blasphemy": false
+  },
+  {
+    "sound": "lets_go.mp3",
+    "label": "Let's go",
+    "blasphemy": false
+  },
+  {
+    "sound": "long_field.mp3",
+    "label": "Long Field",
+    "blasphemy": false
+  },
+  {
+    "sound": "lot_of_time.mp3",
+    "label": "Lot's of time",
+    "blasphemy": false
+  },
+  {
+    "sound": "madonna_0.mp3",
+    "label": "Madonna 0",
+    "blasphemy": true
+  },
+  {
+    "sound": "madonna_1.mp3",
+    "label": "Madonna 1",
+    "blasphemy": true
+  },
+  {
+    "sound": "no_nobody_jesus_christ.mp3",
+    "label": "No nobody Jesus Christ",
+    "blasphemy": false
+  },
+  {
+    "sound": "of_god.mp3",
+    "label": "De dio",
+    "blasphemy": false
+  },
+  {
+    "sound": "paparapapapa.mp3",
+    "label": "Paparapapapa",
+    "blasphemy": false
+  },
+  {
+    "sound": "passed_and_gone.mp3",
+    "label": "Passed and gone",
+    "blasphemy": false
+  },
+  {
+    "sound": "phone.mp3",
+    "label": "Phone",
+    "blasphemy": true
+  },
+  {
+    "sound": "pig_x3.mp3",
+    "label": "Pig X3",
+    "blasphemy": true
+  },
+  {
+    "sound": "punch.mp3",
+    "label": "Punch",
+    "blasphemy": true
+  },
+  {
+    "sound": "repeat_again.mp3",
+    "label": "Repeat Again",
+    "blasphemy": false
+  },
+  {
+    "sound": "retry_because_bubu.mp3",
+    "label": "Retry because Bubu",
+    "blasphemy": true
+  },
+  {
+    "sound": "romano_0.mp3",
+    "label": "Romano 0",
+    "blasphemy": false
+  },
+  {
+    "sound": "romano_1.mp3",
+    "label": "Romano 1",
+    "blasphemy": true
+  },
+  {
+    "sound": "short_was_written.mp3",
+    "label": "Short was written",
+    "blasphemy": true
+  },
+  {
+    "sound": "sigh.mp3",
+    "label": "Sigh",
+    "blasphemy": false
+  },
+  {
+    "sound": "simpaty_cortesy.mp3",
+    "label": "Simpaty courtesy",
+    "blasphemy": true
+  },
+  {
+    "sound": "six_ahead_length.mp3",
+    "label": "Six ahead length",
+    "blasphemy": false
+  },
+  {
+    "sound": "sneeze.mp3",
+    "label": "Sneeze",
+    "blasphemy": false
+  },
+  {
+    "sound": "table.mp3",
+    "label": "Table",
+    "blasphemy": false
+  },
+  {
+    "sound": "thinking_listening.mp3",
+    "label": "Thinking Listening",
+    "blasphemy": false
+  },
+  {
+    "sound": "tu_quoque.mp3",
+    "label": "Tu quoque",
+    "blasphemy": true
+  },
+  {
+    "sound": "vocalizations.mp3",
+    "label": "Vocalizations",
+    "blasphemy": false
+  },
+  {
+    "sound": "wait_a_moment.mp3",
+    "label": "Wait a moment",
+    "blasphemy": true
+  },
+  {
+    "sound": "watta_kind_of_news.mp3",
+    "label": "What a kind of news",
+    "blasphemy": true
+  },
+  {
+    "sound": "why_you_blaspheme.mp3",
+    "label": "Why you blaspheme",
+    "blasphemy": false
+  },
+  {
+    "sound": "will_found.mp3",
+    "label": "Will Found",
+    "blasphemy": false
+  }
+]

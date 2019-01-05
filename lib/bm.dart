@@ -1,12 +1,13 @@
-import 'package:meta/meta.dart';
-
 class BM {
-  final String name;
-  final String audioLocation;
+  String name;
+  String audioLocation;
+  bool blasphemy;
 
-  const BM({
-    @required this.name,
-    @required this.audioLocation,
-  })  : assert(name != null),
-        assert(audioLocation != null);
+  BM(this.name, this.audioLocation, this.blasphemy);
+
+  BM.fromJson(Map json) {
+    this.name = json['label'];
+    this.audioLocation = json['sound'];
+    this.blasphemy = json['blasphemy'];
+  }
 }

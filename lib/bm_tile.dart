@@ -69,13 +69,13 @@ class BMTileState extends State<BMTile> {
                       ? new Icon(
                           Icons.stop,
                           color: widget.bmItem.blasphemy
-                              ? Colors.white
+                              ? Colors.white.withOpacity(0.9)
                               : Colors.grey,
                         )
                       : new Icon(
                           Icons.play_arrow,
                           color: widget.bmItem.blasphemy
-                              ? Colors.white
+                              ? Colors.white.withOpacity(0.9)
                               : Colors.grey,
                         ),
                 )

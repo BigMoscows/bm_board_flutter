@@ -29,7 +29,9 @@ class BMTileState extends State<BMTile> {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         decoration: new BoxDecoration(
-          color: Colors.grey.shade300.withOpacity(0.3),
+          color: widget.bmItem.blasphemy
+              ? Colors.red.withOpacity(0.7)
+              : Colors.grey.shade300.withOpacity(0.3),
           borderRadius: new BorderRadius.circular(5.0),
         ),
         child: InkWell(
@@ -64,8 +66,18 @@ class BMTileState extends State<BMTile> {
                 Text(widget.bmItem.name),
                 IconButton(
                   icon: _playing
-                      ? new Icon(Icons.stop)
-                      : new Icon(Icons.play_arrow),
+                      ? new Icon(
+                          Icons.stop,
+                          color: widget.bmItem.blasphemy
+                              ? Colors.white
+                              : Colors.grey,
+                        )
+                      : new Icon(
+                          Icons.play_arrow,
+                          color: widget.bmItem.blasphemy
+                              ? Colors.white
+                              : Colors.grey,
+                        ),
                 )
               ],
             ),

@@ -36,6 +36,11 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   var _items = <BM>[];
   bool _loading = false;
+  bool _safeMode = true;
+  var _allItems = <BM>[];
+  var _safeItems = <BM>[];
+  var _proModeColor = Colors.red;
+  var _safeModeColor = Colors.white;
 
   AudioCache player = new AudioCache(prefix: 'audio/');
 
@@ -59,6 +64,8 @@ class _HomepageState extends State<Homepage> {
         await DefaultAssetBundle.of(context).loadString("assets/data.json");
 
     final items = parseItems(json);
+    _allItems = items;
+    _safeItems = items.where((i) => !i.blasphemy).toList();
 
     // Create list of sound locations
     var sounds = List<String>();
@@ -71,7 +78,7 @@ class _HomepageState extends State<Homepage> {
     if (fileList.isNotEmpty) {
       setState(() {
         _loading = false;
-        _items = items;
+        _items = _safeItems;
       });
     }
   }
@@ -111,11 +118,40 @@ class _HomepageState extends State<Homepage> {
     )),
   );
 
+  void handleSwitchChange(bool value) {
+    setState(() {
+      _safeMode = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(
+            widget.title,
+            style: TextStyle(color: _safeMode ? Colors.black : Colors.white),
+          ),
+          backgroundColor: _safeMode ? _safeModeColor : _proModeColor,
+          actions: <Widget>[
+            Switch(
+                value: _safeMode,
+                activeColor: Colors.black,
+
+                onChanged: (bool value) {
+                  if (value) {
+                    setState(() {
+                      _items = _safeItems;
+                      _safeMode = value;
+                    });
+                  } else {
+                    setState(() {
+                      _items = _allItems;
+                      _safeMode = value;
+                    });
+                  }
+                }),
+          ],
         ),
         body: Center(
           child: _loading

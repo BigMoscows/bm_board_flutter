@@ -1,6 +1,6 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:bm_board/bm.dart';
+import 'package:bm_board/src/models/bm.dart';
 import 'package:flutter/material.dart';
 
 class BMTile extends StatefulWidget {
@@ -12,7 +12,7 @@ class BMTile extends StatefulWidget {
     @required this.bmItem,
     @required this.player,
   })  : assert(bmItem != null),
-        assert(player != null),
+       /* assert(player != null),*/
         super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class BMTile extends StatefulWidget {
 
 class BMTileState extends State<BMTile> {
   bool _playing = false;
-  AudioPlayer _audioPlayer;
+//  AudioPlayer _audioPlayer;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class BMTileState extends State<BMTile> {
               });
               widget.player.play(widget.bmItem.audioLocation).then((result) {
                 setState(() {
-                  _audioPlayer = result;
+//                  _audioPlayer = result;
                   result.completionHandler = () {
                     setState(() {
                       _playing = false;
@@ -54,7 +54,7 @@ class BMTileState extends State<BMTile> {
               setState(() {
                 _playing = false;
               });
-              _audioPlayer.stop();
+//              _audioPlayer.stop();
             }
           },
           child: Padding(

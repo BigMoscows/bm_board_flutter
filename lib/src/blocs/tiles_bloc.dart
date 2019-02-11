@@ -15,7 +15,7 @@ class TilesBloc {
     _blasphController.add(bmList);
   }
 
-  dispose() {
+  void dispose() {
     _blasphController.close();
   }
 }

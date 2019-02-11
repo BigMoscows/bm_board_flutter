@@ -1,7 +1,6 @@
 import 'package:bm_board/src/blocs/tiles_bloc.dart';
 import 'package:flutter/widgets.dart';
 
-// Used to pass down the reference down the tree
 class TilesBlocProvider extends InheritedWidget {
   final TilesBloc tilesBloc;
 

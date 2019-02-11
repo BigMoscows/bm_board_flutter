@@ -1,18 +1,22 @@
+import 'package:bm_board/src/blocs/tiles_bloc.dart';
 import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
 import 'package:bm_board/src/models/bm.dart';
-import 'package:bm_board/src/ui/bm_tile.dart';
 import 'package:flutter/material.dart';
 
 class BlasphList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tilesBloc = TilesBlocProvider.of(context);
+    final tilesBloc = TilesBloc();
 
-    return StreamBuilder<List<BM>>(
-      // TODO: provide from BLOC
-      initialData: List<BM>(),
-      stream: tilesBloc.blasphStream,
-      builder: _buildBody,
+    tilesBloc.fetchAllBlasph();
+
+    return TilesBlocProvider(
+      tilesBloc: tilesBloc,
+      child: StreamBuilder<List<BM>>(
+          // TODO: provide from BLOC
+          initialData: List<BM>(),
+          stream: tilesBloc.blasphStream,
+          builder: _buildBody),
     );
   }
 

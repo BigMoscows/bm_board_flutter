@@ -1,48 +1,29 @@
-import 'package:bm_board/src/blocs/tiles_bloc.dart';
-import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
-import 'package:bm_board/src/ui/app_theme.dart';
-import 'package:bm_board/src/ui/blasph_list.dart';
+import 'package:bm_board/src/blocs/scaffold_bloc.dart';
+import 'package:bm_board/src/style/app_theme.dart';
+import 'package:bm_board/src/ui/bm_scaffold.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
-
-  // Initiate services as bloc
-  final tiles = TilesBloc();
-
   // Start the app
-  runApp(MyApp(tiles));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
-  final TilesBloc tiles;
-  MyApp(this.tiles);
-
   @override
   Widget build(BuildContext context) {
-    return TilesBlocProvider(
-      tilesBloc: tiles,
-      child: MaterialApp(
-        title: 'Bloc Complex',
-          theme: appTheme,
-        home: MyHomePage(),
-      ),
+    return MaterialApp(
+      title: 'BM Board',
+      theme: appTheme,
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  final scaffoldBloc = ScaffoldBloc();
+
   @override
   Widget build(BuildContext context) {
-    final tilesProvider = TilesBlocProvider.of(context);
-    tilesProvider.fetchAllBlasph();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('BM Board'),
-      ),
-      body: BlasphList(),
-    );
+    return BMScaffold();
   }
 }
-

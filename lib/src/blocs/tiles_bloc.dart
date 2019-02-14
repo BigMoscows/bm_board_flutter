@@ -2,20 +2,70 @@ import 'dart:async';
 
 import 'package:bm_board/src/data/blash_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
+import 'package:bm_board/src/models/scaffold_status.dart';
+import 'package:bm_board/src/style/app_style.dart';
 
 class TilesBloc {
-
-  final _repository = BlasphRepository();
+  final _scaffoldStatusController = StreamController<ScaffoldStatus>();
+  final _changeStatusController = StreamController<bool>();
   final _blasphController = StreamController<List<BM>>();
 
+  Stream<ScaffoldStatus> get scaffoldStatus => _scaffoldStatusController.stream;
+  Sink<bool> get isSafeMode => _changeStatusController.sink;
   Stream<List<BM>> get blasphStream => _blasphController.stream;
 
-  fetchAllBlasph() async {
-    List<BM> bmList = await _repository.fetchBlasph();
-    _blasphController.add(bmList);
-  }
+  List<BM> _allItems;
+  List<BM> _safeItems;
+
+  final _repository = BlasphRepository();
 
   void dispose() {
+    _scaffoldStatusController.close();
+    _changeStatusController.close();
     _blasphController.close();
+  }
+
+  TilesBloc() {
+    _changeStatusController.stream.listen(_handleStatus);
+    fetchFirstBlasph();
+  }
+
+  void fetchFirstBlasph() {
+    _repository.fetchBlasph().then((result) {
+      _allItems = result;
+      _safeItems = result.where((i) => !i.blasphemy).toList();
+
+      _blasphController.add(_safeItems);
+    });
+  }
+
+  void _handleStatus(bool isSafe) {
+    ScaffoldStatus scaffoldStatus;
+    if (isSafe) {
+      scaffoldStatus = ScaffoldStatus(true, AppStyle.safe_mode_status_color);
+    } else {
+      scaffoldStatus = ScaffoldStatus(false, AppStyle.pro_mode_status_color);
+    }
+
+    _scaffoldStatusController.add(scaffoldStatus);
+
+    if (_allItems == null) {
+      _repository.fetchBlasph().then((result) {
+        _allItems = result;
+        _safeItems = result.where((i) => !i.blasphemy).toList();
+
+        if (isSafe) {
+          _blasphController.add(_safeItems);
+        } else {
+          _blasphController.add(_allItems);
+        }
+      });
+    } else {
+      if (isSafe) {
+        _blasphController.add(_safeItems);
+      } else {
+        _blasphController.add(_allItems);
+      }
+    }
   }
 }

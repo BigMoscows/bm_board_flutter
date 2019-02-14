@@ -1,16 +1,16 @@
-import 'package:bm_board/src/blocs/scaffold_bloc.dart';
-import 'package:bm_board/src/blocs/scaffold_bloc_provider.dart';
+import 'package:bm_board/src/blocs/tiles_bloc.dart';
+import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
 import 'package:bm_board/src/ui/blasph_list.dart';
 import 'package:flutter/material.dart';
 
 class BMScaffold extends StatelessWidget {
-  final scaffoldBloc = ScaffoldBloc();
+  final scaffoldBloc = TilesBloc();
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldBlocProvider(
+    return TilesBlocProvider(
       scaffoldBloc: scaffoldBloc,
       child: StreamBuilder(
         initialData: ScaffoldStatus.empty(),

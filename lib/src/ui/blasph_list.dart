@@ -6,18 +6,21 @@ import 'package:flutter/material.dart';
 class BlasphList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tilesBloc = TilesBloc();
-
-    tilesBloc.fetchAllBlasph();
-
-    return TilesBlocProvider(
-      tilesBloc: tilesBloc,
-      child: StreamBuilder<List<BM>>(
-          // TODO: provide from BLOC
-          initialData: List<BM>(),
-          stream: tilesBloc.blasphStream,
-          builder: _buildBody),
+    final tilesBloc = TilesBlocProvider.of(context);
+    return StreamBuilder(
+      initialData: List<BM>(),
+      stream: tilesBloc.blasphStream,
+      builder: _buildBody,
     );
+
+//    return TilesBlocProvider(
+//      tilesBloc: tilesBloc,
+//      child: StreamBuilder<List<BM>>(
+//          // TODO: provide from BLOC
+//          initialData: List<BM>(),
+//          stream: tilesBloc.blasphStream,
+//          builder: _buildBody),
+//    );
   }
 
   Widget _buildBody(BuildContext context, AsyncSnapshot<List<BM>> snapshot) {

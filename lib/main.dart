@@ -1,4 +1,4 @@
-import 'package:bm_board/src/blocs/scaffold_bloc.dart';
+import 'package:bm_board/src/blocs/tiles_bloc.dart';
 import 'package:bm_board/src/style/app_theme.dart';
 import 'package:bm_board/src/ui/bm_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final scaffoldBloc = ScaffoldBloc();
+  final scaffoldBloc = TilesBloc();
 
   @override
   Widget build(BuildContext context) {

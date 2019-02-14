@@ -19,8 +19,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final scaffoldBloc = TilesBloc();
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() {
+    return _MyHomePageState();
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final tilesBloc = TilesBloc();
+
+  @override
+  void dispose() {
+    super.dispose();
+    tilesBloc.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

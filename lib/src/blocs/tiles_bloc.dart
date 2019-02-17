@@ -10,14 +10,14 @@ class TilesBloc {
   // Stream Controllers that controls the input and output streams
   final _scaffoldStatusController = StreamController<ScaffoldStatus>();
   final _changeStatusController = StreamController<bool>();
-  final _blasphController = StreamController<List<BM>>();
+  final _blasphController = StreamController<List<BM>>.broadcast();
 
   // Input
   Sink<bool> get isSafeMode => _changeStatusController.sink;
 
   // Output
   Stream<ScaffoldStatus> get scaffoldStatus => _scaffoldStatusController.stream;
-  Stream<List<BM>> get blasphStream => _blasphController.stream;
+  Stream<List<BM>> get  blasphStream => _blasphController.stream;
 
   List<BM> _allItems;
   List<BM> _safeItems;

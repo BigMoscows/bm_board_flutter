@@ -78,7 +78,7 @@ class BMTileState extends State<BMTile> {
                           color: widget.bmItem.blasphemy
                               ? Colors.white.withOpacity(0.9)
                               : Colors.grey,
-                        ),
+                        ), onPressed: () {},
                 )
               ],
             ),

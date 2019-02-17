@@ -3,7 +3,19 @@ import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/ui/bm_tile.dart';
 import 'package:flutter/material.dart';
 
-class BlasphList extends StatelessWidget {
+class BlasphHomeList extends StatefulWidget {
+  @override
+  BlasphHomeListState createState() {
+    return new BlasphHomeListState();
+  }
+}
+
+class BlasphHomeListState extends State<BlasphHomeList> with AutomaticKeepAliveClientMixin<BlasphHomeList> {
+
+  // Prevent the recreation when changing tab
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     final tilesBloc = TilesBlocProvider.of(context);
@@ -36,9 +48,12 @@ class BlasphList extends StatelessWidget {
         );
       }
     } else {
+
       return Center(
         child: CircularProgressIndicator(),
       );
     }
   }
+
+
 }

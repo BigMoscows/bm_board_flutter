@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bm_board/src/data/blash_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
@@ -6,7 +7,6 @@ import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
 
 class TilesBloc {
-
   // Stream Controllers that controls the input and output streams
   final _scaffoldStatusController = StreamController<ScaffoldStatus>();
   final _changeStatusController = StreamController<bool>();
@@ -78,6 +78,18 @@ class TilesBloc {
       } else {
         _blasphController.add(_allItems);
       }
+    }
+  }
+
+  // Get a random blasph
+  BM getRandomBlasph(bool isSafe) {
+    var randomGen = new Random();
+    if (isSafe) {
+      var randomIndex = randomGen.nextInt(_safeItems.length);
+      return _safeItems[randomIndex];
+    } else {
+      var randomIndex = randomGen.nextInt(_allItems.length);
+      return _allItems[randomIndex];
     }
   }
 }

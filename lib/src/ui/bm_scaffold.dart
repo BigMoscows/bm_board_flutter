@@ -88,51 +88,7 @@ class BMScaffoldState extends State<BMScaffold>
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        child: new Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return new Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            new ListTile(
-                              leading: new Icon(Icons.home),
-                              title: new Text('Home'),
-                              onTap: () {
-                                _controller.animateTo(0);
-                                Navigator.pop(context);
-                              },
-                            ),
-                            new ListTile(
-                              leading: new Icon(Icons.star),
-                              title: new Text('Starred Blasphs'),
-                              onTap: () {
-                                _controller.animateTo(1);
-                                Navigator.pop(context);
-                              },
-                            ),
-                            new ListTile(
-                              leading: new Icon(Icons.category),
-                              title: new Text('Macro'),
-                              onTap: () {
-                                _controller.animateTo(2);
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        );
-                      });
-                }),
-          ],
-        ),
-      ),
+      bottomNavigationBar: _buildBottomAppBar(),
       body: TabBarView(
           controller: _controller,
           children: _allPages.map<Widget>((Page page) {
@@ -145,6 +101,54 @@ class BMScaffoldState extends State<BMScaffold>
                   child: page.widget),
             );
           }).toList()),
+    );
+  }
+
+  Widget _buildBottomAppBar() {
+    return BottomAppBar(
+      child: new Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return new Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          new ListTile(
+                            leading: new Icon(Icons.home),
+                            title: new Text('Home'),
+                            onTap: () {
+                              _controller.animateTo(0);
+                              Navigator.pop(context);
+                            },
+                          ),
+                          new ListTile(
+                            leading: new Icon(Icons.star),
+                            title: new Text('Starred Blasphs'),
+                            onTap: () {
+                              _controller.animateTo(1);
+                              Navigator.pop(context);
+                            },
+                          ),
+                          new ListTile(
+                            leading: new Icon(Icons.category),
+                            title: new Text('Macro'),
+                            onTap: () {
+                              _controller.animateTo(2);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+                    });
+              }),
+        ],
+      ),
     );
   }
 }

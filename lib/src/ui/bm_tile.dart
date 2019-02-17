@@ -59,7 +59,12 @@ class BMTileState extends State<BMTile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(widget.bmItem.name),
+                Text(
+                  widget.bmItem.name,
+                  style: widget.bmItem.blasphemy
+                      ? TextStyle(color: Colors.white)
+                      : TextStyle(color: Colors.black),
+                ),
                 IconButton(
                   icon: _playing
                       ? new Icon(

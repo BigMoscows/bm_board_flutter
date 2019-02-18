@@ -36,8 +36,6 @@ class TilesBloc {
   List<BM> _allStarredItems;
   List<BM> _safeStarredItems;
 
-  bool _safeMode;
-
   final _repository = BlasphRepository();
 
   TilesBloc() {
@@ -59,8 +57,6 @@ class TilesBloc {
   // Load Blasphemies from json and add the sounds to the device cache
   // The app starts in safe mode
   void fetchFirstBlasph() {
-
-    _safeMode = true;
 
     _repository.fetchBlasph().then((result) {
       _allItems = result;
@@ -90,9 +86,7 @@ class TilesBloc {
   // Respond to the changes of "safeness"
   // The list should not be null, but more checks are not bad
   void _handleStatus(bool isSafe) {
-
-    _safeMode = isSafe;
-
+    
     ScaffoldStatus scaffoldStatus;
     if (isSafe) {
       scaffoldStatus = ScaffoldStatus(true, AppStyle.safe_mode_status_color);

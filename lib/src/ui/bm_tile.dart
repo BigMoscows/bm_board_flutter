@@ -72,6 +72,7 @@ class BMTileState extends State<BMTile> {
                   icon: widget.bmItem.starred
                       ? new Icon(
                           Icons.star,
+                          color: Colors.amber,
                         )
                       : new Icon(
                           Icons.star_border,

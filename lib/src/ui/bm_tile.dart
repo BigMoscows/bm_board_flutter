@@ -78,8 +78,8 @@ class BMTileState extends State<BMTile> {
                         ),
                   onPressed: () {
                     widget.bmItem.starred
-                        ? tilesBloc.starBlasph.add(widget.bmItem)
-                        : tilesBloc.unstarBlasph.add(widget.bmItem);
+                        ? tilesBloc.unstarBlasph.add(widget.bmItem)
+                        : tilesBloc.starBlasph.add(widget.bmItem);
                   },
                 )
               ],

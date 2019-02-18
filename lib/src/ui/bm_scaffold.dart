@@ -8,7 +8,6 @@ import 'package:bm_board/src/ui/blasph_home_list.dart';
 import 'package:bm_board/src/ui/page.dart';
 import 'package:flutter/material.dart';
 import 'blasph_starred_list.dart';
-import 'blasph_macro_list.dart';
 
 class BMScaffold extends StatefulWidget {
   @override
@@ -25,7 +24,6 @@ class BMScaffoldState extends State<BMScaffold>
   List<Page> _allPages = <Page>[
     Page(widget: BlasphHomeList()),
     Page(widget: BlasphStarredList()),
-    Page(widget: BlasphMacroList()),
   ];
 
   TabController _controller;

@@ -19,6 +19,7 @@ class BlasphStarredListState extends State<BlasphStarredList>
   @override
   Widget build(BuildContext context) {
     final tilesBloc = TilesBlocProvider.of(context);
+
     return StreamBuilder(
       initialData: List<BM>(),
       stream: tilesBloc.starredBlasphStream,
@@ -29,28 +30,30 @@ class BlasphStarredListState extends State<BlasphStarredList>
   Widget _buildBody(BuildContext context, AsyncSnapshot<List<BM>> snapshot) {
     // Decide if show data or the loader
     if (snapshot.hasData) {
-      // Check if the device is a tablet
-      if (MediaQuery.of(context).size.shortestSide < 600) {
-        return ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return BMTile(bmItem: snapshot.data[index]);
-          },
-          itemCount: snapshot.data.length,
+      if (snapshot.data.isEmpty) {
+        return Center(
+          child: Text("Not starred items"),
         );
       } else {
-        // Build grid view
-        return GridView.count(
-          crossAxisCount: 4,
-          childAspectRatio: 3.0,
-          children: snapshot.data.map((BM bm) {
-            return BMTile(bmItem: bm);
-          }).toList(),
-        );
+        // Check if the device is a tablet
+        if (MediaQuery.of(context).size.shortestSide < 600) {
+          return ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return BMTile(bmItem: snapshot.data[index]);
+            },
+            itemCount: snapshot.data.length,
+          );
+        } else {
+          // Build grid view
+          return GridView.count(
+            crossAxisCount: 4,
+            childAspectRatio: 3.0,
+            children: snapshot.data.map((BM bm) {
+              return BMTile(bmItem: bm);
+            }).toList(),
+          );
+        }
       }
-    } else if (snapshot.hasData && snapshot.data.isEmpty) {
-      return Center(
-        child: Text("Not starred items"),
-      );
     } else {
       return Center(
         child: CircularProgressIndicator(),

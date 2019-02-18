@@ -5,6 +5,8 @@ import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
+import 'package:rxdart/rxdart.dart';
+
 
 class TilesBloc {
   // Stream Controllers that controls the input and output streams
@@ -13,7 +15,8 @@ class TilesBloc {
   final _blasphController = StreamController<List<BM>>.broadcast();
   final _starController = StreamController<BM>();
   final _unstarController = StreamController<BM>();
-  final _starredBlasphController = StreamController<List<BM>>.broadcast();
+  // Behaviour subject streams the last element to the new listeners
+  final _starredBlasphController = BehaviorSubject<List<BM>>();
 
   // Input
   Sink<bool> get isSafeMode => _changeStatusController.sink;
@@ -32,6 +35,8 @@ class TilesBloc {
   // Starred List
   List<BM> _allStarredItems;
   List<BM> _safeStarredItems;
+
+  bool _safeMode;
 
   final _repository = BlasphRepository();
 
@@ -54,6 +59,9 @@ class TilesBloc {
   // Load Blasphemies from json and add the sounds to the device cache
   // The app starts in safe mode
   void fetchFirstBlasph() {
+
+    _safeMode = true;
+
     _repository.fetchBlasph().then((result) {
       _allItems = result;
 
@@ -63,11 +71,9 @@ class TilesBloc {
         _safeStarredItems = starResult.where((i) => !i.blasphemy).toList();
 
         // Fill the star if present in the starred
-        for (BM blasph in _allItems) {
-          // TODO: use where
-          if (_allStarredItems.contains(blasph)) {
-            blasph.starred = true;
-          }
+        for (BM blasph in _allStarredItems) {
+          var item = _allItems.firstWhere((it) => it.name == blasph.name);
+          item.starred = true;
         }
 
         _safeItems = result.where((i) => !i.blasphemy).toList();
@@ -84,6 +90,9 @@ class TilesBloc {
   // Respond to the changes of "safeness"
   // The list should not be null, but more checks are not bad
   void _handleStatus(bool isSafe) {
+
+    _safeMode = isSafe;
+
     ScaffoldStatus scaffoldStatus;
     if (isSafe) {
       scaffoldStatus = ScaffoldStatus(true, AppStyle.safe_mode_status_color);
@@ -119,21 +128,56 @@ class TilesBloc {
   }
 
   void _starBlasph(BM blasph) {
-    // add item to list
-    // stream the value
-    // save the value on the disk
+
+    blasph.starred = true;
+
     _allStarredItems.add(blasph);
     if (!blasph.blasphemy) {
       _safeStarredItems.add(blasph);
       _starredBlasphController.add(_safeStarredItems);
+      _blasphController.add(_safeItems);
+
     } else {
       _starredBlasphController.add(_allStarredItems);
+      _blasphController.add(_allItems);
     }
-    _repository.saveStarredBlasphs(_allStarredItems);
 
+    // save the value on the disk
+    _repository.saveStarredBlasphs(_allStarredItems);
   }
 
   void _unstarBlasph(BM blasph) {
 
+    blasph.starred = false;
+
+    // Clear from starred list
+    var starItem = _allStarredItems.firstWhere((it) => it.name == blasph.name);
+    _allStarredItems.remove(starItem);
+
+    if (!blasph.blasphemy) {
+      var item = _safeStarredItems.firstWhere((it) => it.name == blasph.name);
+      _safeStarredItems.remove(item);
+      _starredBlasphController.add(_safeStarredItems);
+    } else {
+      _starredBlasphController.add(_allStarredItems);
+    }
+
+    // Change value on general list
+    var item = _allItems.firstWhere((it) => it.name == blasph.name);
+    item.starred = false;
+
+    if (!blasph.blasphemy) {
+      var item = _safeItems.firstWhere((it) => it.name == blasph.name);
+      item.starred = false;
+      _blasphController.add(_safeItems);
+    } else {
+      _blasphController.add(_allItems);
+    }
+
+    // save the value on the disk
+    _repository.saveStarredBlasphs(_allStarredItems);
+
   }
+
+
 }

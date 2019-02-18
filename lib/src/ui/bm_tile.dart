@@ -1,4 +1,5 @@
-import 'package:bm_board/src/data/blash_repository.dart';
+import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
+import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,8 @@ class BMTileState extends State<BMTile> {
 
   @override
   Widget build(BuildContext context) {
+    final tilesBloc = TilesBlocProvider.of(context);
+
     return Material(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
@@ -66,19 +69,18 @@ class BMTileState extends State<BMTile> {
                       : TextStyle(color: Colors.black),
                 ),
                 IconButton(
-                  icon: _playing
+                  icon: widget.bmItem.starred
                       ? new Icon(
-                          Icons.stop,
-                          color: widget.bmItem.blasphemy
-                              ? Colors.white.withOpacity(0.9)
-                              : Colors.grey,
+                          Icons.star,
                         )
                       : new Icon(
-                          Icons.play_arrow,
-                          color: widget.bmItem.blasphemy
-                              ? Colors.white.withOpacity(0.9)
-                              : Colors.grey,
-                        ), onPressed: () {},
+                          Icons.star_border,
+                        ),
+                  onPressed: () {
+                    widget.bmItem.starred
+                        ? tilesBloc.starBlasph.add(widget.bmItem)
+                        : tilesBloc.unstarBlasph.add(widget.bmItem);
+                  },
                 )
               ],
             ),

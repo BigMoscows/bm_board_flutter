@@ -1,6 +1,6 @@
 import 'package:bm_board/src/blocs/tiles_bloc.dart';
 import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
-import 'package:bm_board/src/data/blash_repository.dart';
+import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
@@ -97,7 +97,6 @@ class BMScaffoldState extends State<BMScaffold>
               bottom: false,
               child: Container(
                   key: ObjectKey(page.widget),
-                  padding: const EdgeInsets.all(12.0),
                   child: page.widget),
             );
           }).toList()),

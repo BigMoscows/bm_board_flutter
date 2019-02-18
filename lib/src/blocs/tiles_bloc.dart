@@ -116,14 +116,24 @@ class TilesBloc {
   }
 
   // Get a random blasph
-  BM getRandomBlasph(bool isSafe) {
+  BM getRandomBlasph(bool isSafe, int currentIndex) {
     var randomGen = new Random();
-    if (isSafe) {
-      var randomIndex = randomGen.nextInt(_safeItems.length);
-      return _safeItems[randomIndex];
+    if (currentIndex == 0) {
+      if (isSafe) {
+        var randomIndex = randomGen.nextInt(_safeItems.length);
+        return _safeItems[randomIndex];
+      } else {
+        var randomIndex = randomGen.nextInt(_allItems.length);
+        return _allItems[randomIndex];
+      }
     } else {
-      var randomIndex = randomGen.nextInt(_allItems.length);
-      return _allItems[randomIndex];
+      if (isSafe) {
+        var randomIndex = randomGen.nextInt(_safeStarredItems.length);
+        return _safeStarredItems[randomIndex];
+      } else {
+        var randomIndex = randomGen.nextInt(_allStarredItems.length);
+        return _allStarredItems[randomIndex];
+      }
     }
   }
 

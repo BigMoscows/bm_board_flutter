@@ -28,10 +28,13 @@ class BMScaffoldState extends State<BMScaffold>
 
   TabController _controller;
 
+  int currentIndex = 0;
+
   @override
   void initState() {
     super.initState();
     _controller = TabController(vsync: this, length: _allPages.length);
+    _controller.addListener(_onTabChanged);
   }
 
   @override
@@ -52,6 +55,32 @@ class BMScaffoldState extends State<BMScaffold>
     );
   }
 
+  void _onTabChanged() {
+    setState(() {
+      currentIndex = _controller.index;
+    });
+  }
+
+  Widget _buildTitle(bool safeMode) {
+    if (currentIndex == 0) {
+      return Text(
+        "BM Board",
+        style: TextStyle(
+            color: safeMode
+                ? AppStyle.safe_mode_text_color
+                : AppStyle.pro_mode_text_color),
+      );
+    } else {
+      return Text(
+        "Starred Blasphs",
+        style: TextStyle(
+            color: safeMode
+                ? AppStyle.safe_mode_text_color
+                : AppStyle.pro_mode_text_color),
+      );
+    }
+  }
+
   Widget _buildBody(
       BuildContext context, AsyncSnapshot<ScaffoldStatus> snapshot) {
     bool _safeMode = snapshot.data.isSafeMode;
@@ -59,13 +88,7 @@ class BMScaffoldState extends State<BMScaffold>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "BM Board",
-          style: TextStyle(
-              color: _safeMode
-                  ? AppStyle.safe_mode_text_color
-                  : AppStyle.pro_mode_text_color),
-        ),
+        title: _buildTitle(_safeMode),
         backgroundColor: _toolbarColor,
         actions: <Widget>[
           Switch(
@@ -81,7 +104,8 @@ class BMScaffoldState extends State<BMScaffold>
         icon: const Icon(Icons.shuffle),
         label: const Text('Random'),
         onPressed: () {
-          BM randomBlasph = scaffoldBloc.getRandomBlasph(_safeMode);
+          BM randomBlasph =
+              scaffoldBloc.getRandomBlasph(_safeMode, currentIndex);
           repository.player.play(randomBlasph.audioLocation);
         },
       ),
@@ -93,9 +117,7 @@ class BMScaffoldState extends State<BMScaffold>
             return SafeArea(
               top: false,
               bottom: false,
-              child: Container(
-                  key: ObjectKey(page.widget),
-                  child: page.widget),
+              child: Container(key: ObjectKey(page.widget), child: page.widget),
             );
           }).toList()),
     );
@@ -129,14 +151,6 @@ class BMScaffoldState extends State<BMScaffold>
                             title: new Text('Starred Blasphs'),
                             onTap: () {
                               _controller.animateTo(1);
-                              Navigator.pop(context);
-                            },
-                          ),
-                          new ListTile(
-                            leading: new Icon(Icons.category),
-                            title: new Text('Macro'),
-                            onTap: () {
-                              _controller.animateTo(2);
                               Navigator.pop(context);
                             },
                           ),

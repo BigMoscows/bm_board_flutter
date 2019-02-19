@@ -36,6 +36,8 @@ class TilesBloc {
   List<BM> _allStarredItems;
   List<BM> _safeStarredItems;
 
+  bool _safeModeEnabled;
+
   final _repository = BlasphRepository();
 
   TilesBloc() {
@@ -57,6 +59,8 @@ class TilesBloc {
   // Load Blasphemies from json and add the sounds to the device cache
   // The app starts in safe mode
   void fetchFirstBlasph() {
+
+    _safeModeEnabled = true;
 
     _repository.fetchBlasph().then((result) {
       _allItems = result;
@@ -86,7 +90,9 @@ class TilesBloc {
   // Respond to the changes of "safeness"
   // The list should not be null, but more checks are not bad
   void _handleStatus(bool isSafe) {
-    
+
+    _safeModeEnabled = isSafe;
+
     ScaffoldStatus scaffoldStatus;
     if (isSafe) {
       scaffoldStatus = ScaffoldStatus(true, AppStyle.safe_mode_status_color);
@@ -136,11 +142,14 @@ class TilesBloc {
     blasph.starred = true;
 
     _allStarredItems.add(blasph);
+
     if (!blasph.blasphemy) {
       _safeStarredItems.add(blasph);
+    }
+
+    if (_safeModeEnabled) {
       _starredBlasphController.add(_safeStarredItems);
       _blasphController.add(_safeItems);
-
     } else {
       _starredBlasphController.add(_allStarredItems);
       _blasphController.add(_allItems);
@@ -161,6 +170,9 @@ class TilesBloc {
     if (!blasph.blasphemy) {
       var item = _safeStarredItems.firstWhere((it) => it.name == blasph.name);
       _safeStarredItems.remove(item);
+    }
+
+    if (_safeModeEnabled) {
       _starredBlasphController.add(_safeStarredItems);
     } else {
       _starredBlasphController.add(_allStarredItems);
@@ -173,6 +185,9 @@ class TilesBloc {
     if (!blasph.blasphemy) {
       var item = _safeItems.firstWhere((it) => it.name == blasph.name);
       item.starred = false;
+    }
+
+    if (_safeModeEnabled) {
       _blasphController.add(_safeItems);
     } else {
       _blasphController.add(_allItems);

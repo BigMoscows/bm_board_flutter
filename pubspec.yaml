@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.1+10001
+version: 1.0.2+10002
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -16,7 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
   audioplayers: ^0.7.8
-  rxdart: 0.18.0
+  rxdart: ^0.19.0
+  shared_preferences: ^0.5.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,7 +45,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-    - assets/data.json
+    - assets/audio_data.json
     - assets/audio/austra.mp3
     - assets/audio/ahah.mp3
     - assets/audio/austra.mp3
@@ -109,6 +110,16 @@ flutter:
     - assets/audio/watta_kind_of_news.mp3
     - assets/audio/why_you_blaspheme.mp3
     - assets/audio/will_found.mp3
+    - assets/audio/but_good_god_of_a_god.mp3
+    - assets/audio/eagle.mp3
+    - assets/audio/fingers_drumming.mp3
+    - assets/audio/gianni_bugno.mp3
+    - assets/audio/marco_bisagno.mp3
+    - assets/audio/messy_monitor.mp3
+    - assets/audio/nothing_in_front.mp3
+    - assets/audio/purposely.mp3
+    - assets/audio/stooooop.mp3
+    - assets/audio/unremovable_glue.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -313,5 +313,56 @@
     "sound": "will_found.mp3",
     "label": "Will Found",
     "blasphemy": false
+  },
+  {
+    "sound": "but_good_god_of_a_god.mp3",
+    "label": "But Good God of a God",
+    "blasphemy": true
+  },
+  {
+    "sound": "fingers_drumming.mp3",
+    "label": "Fingers Drumming",
+    "blasphemy": false
+  },
+  {
+    "sound": "gianni_bugno.mp3",
+    "label": "Gianni Bugno",
+    "blasphemy": false
+  },
+  {
+    "sound": "marco_bisagno.mp3",
+    "label": "The lawyer Marco Bisagno",
+    "blasphemy": false
+  },
+  {
+    "sound": "messy_monitor.mp3",
+    "label": "Messy Monitor",
+    "blasphemy": false
+  },
+  {
+    "sound": "nothing_in_front.mp3",
+    "label": "Nothing in front",
+    "blasphemy": false
+  },
+  {
+    "sound": "purposely.mp3",
+    "label": "Purposely",
+    "blasphemy": false
+  },
+  {
+    "sound": "stooooop.mp3",
+    "label": "Stooooop",
+    "blasphemy": false
+  },
+  {
+    "sound": "unremovable_glue.mp3",
+    "label": "Unremovable Glue",
+    "blasphemy": false
+  },
+  {
+    "sound": "eagle.mp3",
+    "label": "Eagle",
+    "blasphemy": false
   }
+
 ]

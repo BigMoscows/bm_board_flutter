@@ -32,7 +32,7 @@ class BlasphStarredListState extends State<BlasphStarredList>
     if (snapshot.hasData) {
       if (snapshot.data.isEmpty) {
         return Center(
-          child: Text("Not starred items"),
+          child: Text("No starred items"),
         );
       } else {
         // Check if the device is a tablet

@@ -63,6 +63,9 @@ class TilesBloc {
     _safeModeEnabled = true;
 
     _repository.fetchBlasph().then((result) {
+
+      result.sort((a, b) => a.name.compareTo(b.name));
+      
       _allItems = result;
 
       // Fetch the starred items from the disk

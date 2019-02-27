@@ -7,6 +7,8 @@ import 'package:bm_board/src/style/app_style.dart';
 import 'package:bm_board/src/ui/blasph_home_list.dart';
 import 'package:bm_board/src/ui/page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'blasph_starred_list.dart';
 
 class BMScaffold extends StatefulWidget {
@@ -152,6 +154,19 @@ class BMScaffoldState extends State<BMScaffold>
                             onTap: () {
                               _controller.animateTo(1);
                               Navigator.pop(context);
+                            },
+                          ),
+                          new ListTile(
+                            leading: new Icon(Icons.favorite),
+                            title: new Text('Donate'),
+                            onTap: () async {
+                              Navigator.pop(context);
+                              const url = 'https://www.paypal.me/MarcoGomiero';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
                             },
                           ),
                         ],

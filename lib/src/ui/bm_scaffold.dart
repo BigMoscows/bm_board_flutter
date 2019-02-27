@@ -7,6 +7,8 @@ import 'package:bm_board/src/style/app_style.dart';
 import 'package:bm_board/src/ui/blasph_home_list.dart';
 import 'package:bm_board/src/ui/page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'blasph_starred_list.dart';
 
 class BMScaffold extends StatefulWidget {
@@ -15,6 +17,8 @@ class BMScaffold extends StatefulWidget {
     return new BMScaffoldState();
   }
 }
+
+enum Menu { donate }
 
 class BMScaffoldState extends State<BMScaffold>
     with SingleTickerProviderStateMixin {
@@ -97,6 +101,31 @@ class BMScaffoldState extends State<BMScaffold>
               onChanged: (bool value) {
                 scaffoldBloc.isSafeMode.add(value);
               }),
+          PopupMenuButton<Menu>(
+            icon: _safeMode
+                ? Icon(
+                    Icons.more_vert,
+                    color: AppStyle.safe_mode_text_color,
+                  )
+                : Icon(
+                    Icons.more_vert,
+                    color: AppStyle.pro_mode_text_color,
+                  ),
+            onSelected: (Menu result) async {
+              const url = 'https://www.paypal.me/MarcoGomiero';
+              if (await canLaunch(url)) {
+              await launch(url);
+              } else {
+              throw 'Could not launch $url';
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                  const PopupMenuItem<Menu>(
+                    value: Menu.donate,
+                    child: Text('Donate'),
+                  ),
+                ],
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -163,3 +192,5 @@ class BMScaffoldState extends State<BMScaffold>
     );
   }
 }
+
+

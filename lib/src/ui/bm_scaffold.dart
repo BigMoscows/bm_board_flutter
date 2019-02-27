@@ -18,8 +18,6 @@ class BMScaffold extends StatefulWidget {
   }
 }
 
-enum Menu { donate }
-
 class BMScaffoldState extends State<BMScaffold>
     with SingleTickerProviderStateMixin {
   final scaffoldBloc = TilesBloc();
@@ -101,31 +99,6 @@ class BMScaffoldState extends State<BMScaffold>
               onChanged: (bool value) {
                 scaffoldBloc.isSafeMode.add(value);
               }),
-          PopupMenuButton<Menu>(
-            icon: _safeMode
-                ? Icon(
-                    Icons.more_vert,
-                    color: AppStyle.safe_mode_text_color,
-                  )
-                : Icon(
-                    Icons.more_vert,
-                    color: AppStyle.pro_mode_text_color,
-                  ),
-            onSelected: (Menu result) async {
-              const url = 'https://www.paypal.me/MarcoGomiero';
-              if (await canLaunch(url)) {
-              await launch(url);
-              } else {
-              throw 'Could not launch $url';
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                  const PopupMenuItem<Menu>(
-                    value: Menu.donate,
-                    child: Text('Donate'),
-                  ),
-                ],
-          ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -183,6 +156,19 @@ class BMScaffoldState extends State<BMScaffold>
                               Navigator.pop(context);
                             },
                           ),
+                          new ListTile(
+                            leading: new Icon(Icons.favorite),
+                            title: new Text('Donate'),
+                            onTap: () async {
+                              Navigator.pop(context);
+                              const url = 'https://www.paypal.me/MarcoGomiero';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                          ),
                         ],
                       );
                     });
@@ -192,5 +178,3 @@ class BMScaffoldState extends State<BMScaffold>
     );
   }
 }
-
-

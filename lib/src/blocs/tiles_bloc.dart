@@ -3,8 +3,11 @@ import 'dart:math';
 
 import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
+import 'package:bm_board/src/models/bm_stat.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:get_version/get_version.dart';
 import 'package:rxdart/rxdart.dart';
 
 
@@ -201,5 +204,20 @@ class TilesBloc {
 
   }
 
+  // Push play stats to Firebase
+  void pushStat(BM blasph, bool fromRandom) {
+    try {
+      GetVersion.appID.then((result) {
+        if (result.contains("office")) {
+          // the flavour is office
+          BMStat stat =
+          BMStat(DateTime.now(), blasph.audioLocation.replaceAll(".mp3", ""), fromRandom, blasph.blasphemy);
+          FirebaseDatabase.instance.reference().child('blasphemies_recap').push().set(stat.toJson());
+        }
+      });
+    } catch (PlatformException) {
+      // no stats are sent
+    }
+  }
 
 }

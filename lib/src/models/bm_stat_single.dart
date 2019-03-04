@@ -1,11 +1,11 @@
-class BMStat {
+class BMStatSingle {
   DateTime dateTime;
   String blasphemy;
   bool fromRandom;
   bool isBlasphemy;
 
 
-  BMStat(this.dateTime, this.blasphemy, this.fromRandom, this.isBlasphemy);
+  BMStatSingle(this.dateTime, this.blasphemy, this.fromRandom, this.isBlasphemy);
 
   toJson() {
     return {

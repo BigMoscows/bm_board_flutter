@@ -111,7 +111,8 @@ class BMScaffoldState extends State<BMScaffold>
           BM randomBlasph =
               scaffoldBloc.getRandomBlasph(_safeMode, currentIndex);
           repository.player.play(randomBlasph.audioLocation);
-          tilesBloc.pushStat(randomBlasph, true);
+          tilesBloc.pushSingleStat(randomBlasph, true);
+          tilesBloc.pushAggregateStat(randomBlasph);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

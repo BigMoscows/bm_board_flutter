@@ -1,10 +1,7 @@
 import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
 import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
-import 'package:bm_board/src/models/bm_stat.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:get_version/get_version.dart';
 
 class BMTile extends StatefulWidget {
   final BM bmItem;
@@ -42,7 +39,8 @@ class BMTileState extends State<BMTile> {
               setState(() {
                 _playing = true;
               });
-              tilesBloc.pushStat(widget.bmItem, false );
+              tilesBloc.pushSingleStat(widget.bmItem, false );
+              tilesBloc.pushAggregateStat(widget.bmItem);
               BlasphRepository()
                   .player
                   .play(widget.bmItem.audioLocation)

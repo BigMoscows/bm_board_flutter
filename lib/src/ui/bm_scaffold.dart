@@ -87,6 +87,8 @@ class BMScaffoldState extends State<BMScaffold>
       BuildContext context, AsyncSnapshot<ScaffoldStatus> snapshot) {
     bool _safeMode = snapshot.data.isSafeMode;
     Color _toolbarColor = snapshot.data.toolbarColor;
+    final tilesBloc = TilesBlocProvider.of(context);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -109,6 +111,8 @@ class BMScaffoldState extends State<BMScaffold>
           BM randomBlasph =
               scaffoldBloc.getRandomBlasph(_safeMode, currentIndex);
           repository.player.play(randomBlasph.audioLocation);
+          tilesBloc.pushSingleStat(randomBlasph, true);
+          tilesBloc.pushAggregateStat(randomBlasph);
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

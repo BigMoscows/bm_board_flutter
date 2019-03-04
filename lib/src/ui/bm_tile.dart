@@ -35,9 +35,12 @@ class BMTileState extends State<BMTile> {
         child: InkWell(
           onTap: () {
             if (!_playing) {
+              // Firebase
               setState(() {
                 _playing = true;
               });
+              tilesBloc.pushSingleStat(widget.bmItem, false );
+              tilesBloc.pushAggregateStat(widget.bmItem);
               BlasphRepository()
                   .player
                   .play(widget.bmItem.audioLocation)

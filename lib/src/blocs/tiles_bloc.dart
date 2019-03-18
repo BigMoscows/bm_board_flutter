@@ -3,10 +3,13 @@ import 'dart:math';
 
 import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
+import 'package:bm_board/src/models/bm_stat_aggregate.dart';
+import 'package:bm_board/src/models/bm_stat_single.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:get_version/get_version.dart';
 import 'package:rxdart/rxdart.dart';
-
 
 class TilesBloc {
   // Stream Controllers that controls the input and output streams
@@ -59,11 +62,9 @@ class TilesBloc {
   // Load Blasphemies from json and add the sounds to the device cache
   // The app starts in safe mode
   void fetchFirstBlasph() {
-
     _safeModeEnabled = true;
 
     _repository.fetchBlasph().then((result) {
-
       result.sort((a, b) => a.name.compareTo(b.name));
 
       _allItems = result;
@@ -93,7 +94,6 @@ class TilesBloc {
   // Respond to the changes of "safeness"
   // The list should not be null, but more checks are not bad
   void _handleStatus(bool isSafe) {
-
     _safeModeEnabled = isSafe;
 
     ScaffoldStatus scaffoldStatus;
@@ -141,7 +141,6 @@ class TilesBloc {
   }
 
   void _starBlasph(BM blasph) {
-
     blasph.starred = true;
 
     _allStarredItems.add(blasph);
@@ -163,7 +162,6 @@ class TilesBloc {
   }
 
   void _unstarBlasph(BM blasph) {
-
     blasph.starred = false;
 
     // Clear from starred list
@@ -198,8 +196,68 @@ class TilesBloc {
 
     // save the value on the disk
     _repository.saveStarredBlasphs(_allStarredItems);
-
   }
 
+  // Push play stats to Firebase
+  void pushSingleStat(BM blasph, bool fromRandom) {
+    try {
+      GetVersion.appID.then((result) {
+        if (result.contains("office")) {
+          // the flavour is office
+          // single stat
+          BMStatSingle stat = BMStatSingle(
+              DateTime.now(),
+              blasph.audioLocation.replaceAll(".mp3", ""),
+              fromRandom,
+              blasph.blasphemy);
+          FirebaseDatabase.instance
+              .reference()
+              .child('blasphemies_recap')
+              .push()
+              .set(stat.toJson());
+        }
+      });
+    } catch (PlatformException) {
+      // no stats are sent
+    }
+  }
 
+  void pushAggregateStat(BM blasph) {
+    try {
+      GetVersion.appID.then((result) {
+        if (result.contains("office")) {
+          // the flavour is office
+          //aggregate stat
+          final key = blasph.audioLocation.replaceAll(".mp3", "");
+          FirebaseDatabase.instance
+              .reference()
+              .child('blasphemies')
+              .child(key)
+              .once()
+              .then((value) {
+            if (value.value == null) {
+              BMStatAggregate aggregateStat =
+                  BMStatAggregate(key, DateTime.now(), blasph.blasphemy, 1);
+              FirebaseDatabase.instance
+                  .reference()
+                  .child('blasphemies')
+                  .child(key)
+                  .set(aggregateStat.toJson());
+            } else {
+              BMStatAggregate aggregateStat =
+                  new BMStatAggregate.fromSnapshot(value);
+              aggregateStat.playCount = aggregateStat.playCount + 1;
+              FirebaseDatabase.instance
+                  .reference()
+                  .child('blasphemies')
+                  .child(key)
+                  .set(aggregateStat.toJson());
+            }
+          });
+        }
+      });
+    } catch (PlatformException) {
+      // no stats are sent
+    }
+  }
 }

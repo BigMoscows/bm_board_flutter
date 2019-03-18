@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.3+10003
+version: 1.0.4+10004
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -19,6 +19,8 @@ dependencies:
   rxdart: ^0.19.0
   shared_preferences: ^0.5.1
   url_launcher: ^5.0.1
+  get_version: ^0.0.8+5
+  firebase_database: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -121,6 +123,8 @@ flutter:
     - assets/audio/purposely.mp3
     - assets/audio/stooooop.mp3
     - assets/audio/unremovable_glue.mp3
+    - assets/audio/clearing_voice_0.mp3
+    - assets/audio/clearing_voice_1.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

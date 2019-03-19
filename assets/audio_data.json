@@ -375,8 +375,33 @@
     "blasphemy": false
   },
   {
-    "sound": "cof_cof.mp3",
-    "label": "Cof Cof",
+    "sound": "cof_cof_0.mp3",
+    "label": "Cof Cof 0",
+    "blasphemy": false
+  },
+  {
+    "sound": "cof_cof_1.mp3",
+    "label": "Cof Cof 1",
+    "blasphemy": false
+  },
+  {
+    "sound": "intro.mp3",
+    "label": "Intro",
+    "blasphemy": false
+  },
+  {
+    "sound": "rewind.mp3",
+    "label": "Rewind",
+    "blasphemy": false
+  },
+  {
+    "sound": "moscow_said_ooooooooh.mp3",
+    "label": "Moscow Said Ooooooooh",
+    "blasphemy": false
+  },
+  {
+    "sound": "mario_little_iron.mp3",
+    "label": "Mario Little Iron",
     "blasphemy": false
   }
 ]

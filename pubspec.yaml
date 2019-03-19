@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.5+10005
+version: 1.0.6+10006
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -125,7 +125,12 @@ flutter:
     - assets/audio/unremovable_glue.mp3
     - assets/audio/clearing_voice_0.mp3
     - assets/audio/clearing_voice_1.mp3
-    - assets/audio/cof_cof.mp3
+    - assets/audio/cof_cof_0.mp3
+    - assets/audio/cof_cof_1.mp3
+    - assets/audio/intro.mp3
+    - assets/audio/rewind.mp3
+    - assets/audio/moscow_said_ooooooooh.mp3
+    - assets/audio/mario_little_iron.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

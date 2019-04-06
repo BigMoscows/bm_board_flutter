@@ -73,6 +73,9 @@ android {
             applicationIdSuffix ".office"
             versionNameSuffix ".office"
         }
+        production {
+            dimension "flavor-type"
+        }
     }
 
 

@@ -70,6 +70,8 @@ build/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-/android/key.properties
 ios/Frameworks/
 /android/app/src/office/google-services.json
+android/app/src/production/
+gen/
+sampledata/

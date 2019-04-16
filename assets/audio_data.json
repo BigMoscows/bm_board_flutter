@@ -403,5 +403,40 @@
     "sound": "mario_little_iron.mp3",
     "label": "Mario Little Iron",
     "blasphemy": false
+  },
+  {
+    "sound": "red_light.mp3",
+    "label": "Red Light",
+    "blasphemy": false
+  },
+  {
+    "sound": "jean_frank_bertani.mp3",
+    "label": "Jean Frank Bertani",
+    "blasphemy": false
+  },
+  {
+    "sound": "gabriel_little_wind.mp3",
+    "label": "Gabriel Little Wind",
+    "blasphemy": false
+  },
+  {
+    "sound": "light_blue_pimberg.mp3",
+    "label": "Light Blue Pimberg",
+    "blasphemy": false
+  },
+  {
+    "sound": "povegliano.mp3",
+    "label": "Povegliano",
+    "blasphemy": false
+  },
+  {
+    "sound": "vigasio.mp3",
+    "label": "Vigasio",
+    "blasphemy": false
+  },
+  {
+    "sound": "lugagnano's_water_lack.mp3",
+    "label": "Lugagnano Water Lack",
+    "blasphemy": false
   }
 ]

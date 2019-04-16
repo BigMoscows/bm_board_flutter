@@ -131,6 +131,13 @@ flutter:
     - assets/audio/rewind.mp3
     - assets/audio/moscow_said_ooooooooh.mp3
     - assets/audio/mario_little_iron.mp3
+    - assets/audio/red_light.mp3
+    - assets/audio/jean_frank_bertani.mp3
+    - assets/audio/gabriel_little_wind.mp3
+    - assets/audio/light_blue_pimberg.mp3
+    - assets/audio/povegliano.mp3
+    - assets/audio/vigasio.mp3
+    - assets/audio/lugagnano's_water_lack.mp3
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

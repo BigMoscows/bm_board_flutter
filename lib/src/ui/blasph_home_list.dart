@@ -29,6 +29,7 @@ class BlasphHomeListState extends State<BlasphHomeList> with AutomaticKeepAliveC
   Widget _buildBody(BuildContext context, AsyncSnapshot<List<BM>> snapshot) {
     // Decide if show data or the loader
     if (snapshot.hasData && snapshot.data.isNotEmpty) {
+
       // Check if the device is a tablet
       if (MediaQuery.of(context).size.shortestSide < 600) {
         return ListView.builder(

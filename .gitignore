@@ -75,3 +75,4 @@ ios/Frameworks/
 android/app/src/production/
 gen/
 sampledata/
+/lib/src/utils/dsn.dart

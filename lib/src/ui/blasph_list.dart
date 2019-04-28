@@ -1,28 +1,33 @@
+import 'dart:async';
+
 import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/ui/bm_tile.dart';
 import 'package:flutter/material.dart';
 
-class BlasphStarredList extends StatefulWidget {
+class BlasphList extends StatefulWidget {
+
+  final String emptyMessage;
+  final Stream<List<BM>> blasphStream;
+
+  BlasphList(this.blasphStream, this.emptyMessage);
+
   @override
-  BlasphStarredListState createState() {
-    return new BlasphStarredListState();
-  }
+  _BlasphListState createState() => _BlasphListState();
 }
 
-class BlasphStarredListState extends State<BlasphStarredList>
-    with AutomaticKeepAliveClientMixin<BlasphStarredList> {
+class _BlasphListState extends State<BlasphList>
+    with AutomaticKeepAliveClientMixin<BlasphList> {
+
   // Prevent the recreation when changing tab
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    final tilesBloc = TilesBlocProvider.of(context);
-
     return StreamBuilder(
       initialData: List<BM>(),
-      stream: tilesBloc.starredBlasphStream,
+      stream: widget.blasphStream,
       builder: _buildBody,
     );
   }
@@ -32,7 +37,7 @@ class BlasphStarredListState extends State<BlasphStarredList>
     if (snapshot.hasData) {
       if (snapshot.data.isEmpty) {
         return Center(
-          child: Text("No starred items"),
+          child: Text(widget.emptyMessage),
         );
       } else {
         // Check if the device is a tablet

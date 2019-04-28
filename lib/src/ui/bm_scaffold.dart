@@ -4,12 +4,10 @@ import 'package:bm_board/src/data/blasph_repository.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/models/scaffold_status.dart';
 import 'package:bm_board/src/style/app_style.dart';
-import 'package:bm_board/src/ui/blasph_home_list.dart';
+import 'package:bm_board/src/ui/blasph_list.dart';
 import 'package:bm_board/src/ui/page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'blasph_starred_list.dart';
 
 class BMScaffold extends StatefulWidget {
   @override
@@ -23,18 +21,22 @@ class BMScaffoldState extends State<BMScaffold>
   final scaffoldBloc = TilesBloc();
   final repository = BlasphRepository();
 
-  List<Page> _allPages = <Page>[
-    Page(widget: BlasphHomeList()),
-    Page(widget: BlasphStarredList()),
-  ];
-
   TabController _controller;
+  List<Page> _allPages;
 
   int currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
+
+    _allPages = <Page>[
+      Page(widget: BlasphList(scaffoldBloc.blasphStream, "Blaphs not found")),
+      Page(
+          widget:
+              BlasphList(scaffoldBloc.starredBlasphStream, "No starred items")),
+    ];
+
     _controller = TabController(vsync: this, length: _allPages.length);
     _controller.addListener(_onTabChanged);
   }
@@ -88,7 +90,6 @@ class BMScaffoldState extends State<BMScaffold>
     bool _safeMode = snapshot.data.isSafeMode;
     Color _toolbarColor = snapshot.data.toolbarColor;
     final tilesBloc = TilesBlocProvider.of(context);
-
 
     return Scaffold(
       appBar: AppBar(

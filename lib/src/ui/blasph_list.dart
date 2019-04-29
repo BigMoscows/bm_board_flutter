@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bm_board/src/blocs/tiles_bloc_provider.dart';
 import 'package:bm_board/src/models/bm.dart';
 import 'package:bm_board/src/ui/bm_tile.dart';
 import 'package:flutter/material.dart';

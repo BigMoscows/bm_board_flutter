@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:bm_board/src/data/blasph_repository.dart';
@@ -18,17 +19,22 @@ class TilesBloc {
   final _blasphController = StreamController<List<BM>>.broadcast();
   final _starController = StreamController<BM>();
   final _unstarController = StreamController<BM>();
+
   // Behaviour subject streams the last element to the new listeners
   final _starredBlasphController = BehaviorSubject<List<BM>>();
 
   // Input
   Sink<bool> get isSafeMode => _changeStatusController.sink;
+
   Sink<BM> get starBlasph => _starController.sink;
+
   Sink<BM> get unstarBlasph => _unstarController.sink;
 
   // Output
   Stream<ScaffoldStatus> get scaffoldStatus => _scaffoldStatusController.stream;
+
   Stream<List<BM>> get blasphStream => _blasphController.stream;
+
   Stream<List<BM>> get starredBlasphStream => _starredBlasphController.stream;
 
   // Home List
@@ -200,64 +206,70 @@ class TilesBloc {
 
   // Push play stats to Firebase
   void pushSingleStat(BM blasph, bool fromRandom) {
-    try {
-      GetVersion.appID.then((result) {
-        if (result.contains("office")) {
-          // the flavour is office
-          // single stat
-          BMStatSingle stat = BMStatSingle(
-              DateTime.now(),
-              blasph.audioLocation.replaceAll(".mp3", ""),
-              fromRandom,
-              blasph.blasphemy);
-          FirebaseDatabase.instance
-              .reference()
-              .child('blasphemies_recap')
-              .push()
-              .set(stat.toJson());
-        }
-      });
-    } catch (PlatformException) {
-      // no stats are sent
+    // We push stats only for a certain android flavour
+    if (Platform.isAndroid) {
+      try {
+        GetVersion.appID.then((result) {
+          if (result.contains("office")) {
+            // the flavour is office
+            // single stat
+            BMStatSingle stat = BMStatSingle(
+                DateTime.now(),
+                blasph.audioLocation.replaceAll(".mp3", ""),
+                fromRandom,
+                blasph.blasphemy);
+            FirebaseDatabase.instance
+                .reference()
+                .child('blasphemies_recap')
+                .push()
+                .set(stat.toJson());
+          }
+        });
+      } catch (PlatformException) {
+        // no stats are sent
+      }
     }
   }
 
   void pushAggregateStat(BM blasph) {
-    try {
-      GetVersion.appID.then((result) {
-        if (result.contains("office")) {
-          // the flavour is office
-          //aggregate stat
-          final key = blasph.audioLocation.replaceAll(".mp3", "");
-          FirebaseDatabase.instance
-              .reference()
-              .child('blasphemies')
-              .child(key)
-              .once()
-              .then((value) {
-            if (value.value == null) {
-              BMStatAggregate aggregateStat =
-                  BMStatAggregate(key, DateTime.now(), blasph.blasphemy, 1);
-              FirebaseDatabase.instance
-                  .reference()
-                  .child('blasphemies')
-                  .child(key)
-                  .set(aggregateStat.toJson());
-            } else {
-              BMStatAggregate aggregateStat =
-                  new BMStatAggregate.fromSnapshot(value);
-              aggregateStat.playCount = aggregateStat.playCount + 1;
-              FirebaseDatabase.instance
-                  .reference()
-                  .child('blasphemies')
-                  .child(key)
-                  .set(aggregateStat.toJson());
-            }
-          });
-        }
-      });
-    } catch (PlatformException) {
-      // no stats are sent
+    // We push stats only for a certain android flavour
+    if (Platform.isAndroid) {
+      try {
+        GetVersion.appID.then((result) {
+          if (result.contains("office")) {
+            // the flavour is office
+            //aggregate stat
+            final key = blasph.audioLocation.replaceAll(".mp3", "");
+            FirebaseDatabase.instance
+                .reference()
+                .child('blasphemies')
+                .child(key)
+                .once()
+                .then((value) {
+              if (value.value == null) {
+                BMStatAggregate aggregateStat =
+                    BMStatAggregate(key, DateTime.now(), blasph.blasphemy, 1);
+                FirebaseDatabase.instance
+                    .reference()
+                    .child('blasphemies')
+                    .child(key)
+                    .set(aggregateStat.toJson());
+              } else {
+                BMStatAggregate aggregateStat =
+                    new BMStatAggregate.fromSnapshot(value);
+                aggregateStat.playCount = aggregateStat.playCount + 1;
+                FirebaseDatabase.instance
+                    .reference()
+                    .child('blasphemies')
+                    .child(key)
+                    .set(aggregateStat.toJson());
+              }
+            });
+          }
+        });
+      } catch (PlatformException) {
+        // no stats are sent
+      }
     }
   }
 }

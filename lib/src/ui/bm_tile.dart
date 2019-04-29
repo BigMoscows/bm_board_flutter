@@ -39,7 +39,7 @@ class BMTileState extends State<BMTile> {
               setState(() {
                 _playing = true;
               });
-              tilesBloc.pushSingleStat(widget.bmItem, false );
+              tilesBloc.pushSingleStat(widget.bmItem, false);
               tilesBloc.pushAggregateStat(widget.bmItem);
               BlasphRepository()
                   .player
@@ -65,12 +65,15 @@ class BMTileState extends State<BMTile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
+                Flexible(
+                    child: Text(
                   widget.bmItem.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                   style: widget.bmItem.blasphemy
                       ? TextStyle(color: Colors.white)
                       : TextStyle(color: Colors.black),
-                ),
+                )),
                 IconButton(
                   icon: widget.bmItem.starred
                       ? new Icon(

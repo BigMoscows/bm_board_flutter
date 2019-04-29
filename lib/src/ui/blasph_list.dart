@@ -6,7 +6,6 @@ import 'package:bm_board/src/ui/bm_tile.dart';
 import 'package:flutter/material.dart';
 
 class BlasphList extends StatefulWidget {
-
   final String emptyMessage;
   final Stream<List<BM>> blasphStream;
 
@@ -18,7 +17,6 @@ class BlasphList extends StatefulWidget {
 
 class _BlasphListState extends State<BlasphList>
     with AutomaticKeepAliveClientMixin<BlasphList> {
-
   // Prevent the recreation when changing tab
   @override
   bool get wantKeepAlive => true;
@@ -50,8 +48,12 @@ class _BlasphListState extends State<BlasphList>
           );
         } else {
           // Build grid view
+          int columns =
+              MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 4
+                  : 3;
           return GridView.count(
-            crossAxisCount: 4,
+            crossAxisCount: columns,
             childAspectRatio: 3.0,
             children: snapshot.data.map((BM bm) {
               return BMTile(bmItem: bm);
